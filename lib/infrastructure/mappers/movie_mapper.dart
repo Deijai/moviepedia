@@ -1,4 +1,5 @@
 import 'package:moviepedia/domain/entities/movie.dart';
+import 'package:moviepedia/infrastructure/models/moviedb/movie_details_moviedb.dart';
 import 'package:moviepedia/infrastructure/models/moviedb/movie_moviedb.dart';
 
 class MovieMapper {
@@ -21,4 +22,24 @@ class MovieMapper {
       video: movieMovieDB.video,
       voteAverage: movieMovieDB.voteAverage,
       voteCount: movieMovieDB.voteCount);
+
+  static Movie movieDetailDBToEntity(MovieDetailsDbResponse movieDetailsDbResponse) => Movie(
+      adult: movieDetailsDbResponse.adult,
+      backdropPath: (movieDetailsDbResponse.backdropPath != '')
+          ? 'https://image.tmdb.org/t/p/w500/${movieDetailsDbResponse.backdropPath}'
+          : 'https://ih1.redbubble.net/image.1893341687.8294/fposter,small,wall_texture,product,500x500.jpg',
+      genreIds: movieDetailsDbResponse.genres.map((e) => e.name).toList(),
+      id: movieDetailsDbResponse.id,
+      originalLanguage: movieDetailsDbResponse.originalLanguage,
+      originalTitle: movieDetailsDbResponse.originalTitle,
+      overview: movieDetailsDbResponse.overview,
+      popularity: movieDetailsDbResponse.popularity,
+      posterPath: (movieDetailsDbResponse.posterPath != '')
+          ? 'https://image.tmdb.org/t/p/w500/${movieDetailsDbResponse.posterPath}'
+          : 'https://ih1.redbubble.net/image.1893341687.8294/fposter,small,wall_texture,product,500x500.jpg',
+      releaseDate: movieDetailsDbResponse.releaseDate,
+      title: movieDetailsDbResponse.title,
+      video: movieDetailsDbResponse.video,
+      voteAverage: movieDetailsDbResponse.voteAverage,
+      voteCount: movieDetailsDbResponse.voteCount);
 }

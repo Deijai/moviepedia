@@ -3,6 +3,7 @@ import 'package:moviepedia/config/constants/environment.dart';
 import 'package:moviepedia/domain/datasources/movies_datasource.dart';
 import 'package:moviepedia/domain/entities/movie.dart';
 import 'package:moviepedia/infrastructure/mappers/movie_mapper.dart';
+import 'package:moviepedia/infrastructure/models/moviedb/movie_details_moviedb.dart';
 import 'package:moviepedia/infrastructure/models/moviedb/moviedb_response.dart';
 
 class MoviesDBDataSource extends MoviesDataSource {
@@ -20,6 +21,12 @@ class MoviesDBDataSource extends MoviesDataSource {
         .toList();
 
     return movies;
+  }
+
+  Movie _toJsonMovie(Map<String, dynamic> json) {
+    final movieDetails = MovieDetailsDbResponse.fromJson(json);
+    final movie = MovieMapper.movieDetailDBToEntity(movieDetails);
+    return movie;
   }
 
   @override
@@ -48,5 +55,15 @@ class MoviesDBDataSource extends MoviesDataSource {
     final Response<dynamic> response =
         await dio.get('/movie/top_rated', queryParameters: {'page': page});
     return _jsonToMovies(response.data);
+  }
+
+  @override
+  Future<Movie> getMovieById(String id) async {
+    final Response<dynamic> response = await dio.get('/movie/$id');
+    if (response.statusCode != 200) {
+      return throw Exception('Movie with id: $id not found.');
+    }
+
+    return _toJsonMovie(response.data);
   }
 }
