@@ -16,8 +16,10 @@ class MovieMapper {
       popularity: movieMovieDB.popularity,
       posterPath: (movieMovieDB.posterPath != '')
           ? 'https://image.tmdb.org/t/p/w500/${movieMovieDB.posterPath}'
-          : 'no-poster',
-      releaseDate: movieMovieDB.releaseDate,
+          : 'https://ih1.redbubble.net/image.1893341687.8294/fposter,small,wall_texture,product,500x500.jpg',
+      releaseDate: movieMovieDB.releaseDate != null
+          ? movieMovieDB.releaseDate!
+          : DateTime.now(),
       title: movieMovieDB.title,
       video: movieMovieDB.video,
       voteAverage: movieMovieDB.voteAverage,

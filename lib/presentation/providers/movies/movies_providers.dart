@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:moviepedia/domain/entities/movie.dart';
-import 'package:moviepedia/presentation/providers/movies/movies_repository_provider.dart';
+import 'package:moviepedia/presentation/providers/movies/repositories/movies_repository_provider.dart';
 
 // Now Playing
 final nowPlayingMoviesProvider =
