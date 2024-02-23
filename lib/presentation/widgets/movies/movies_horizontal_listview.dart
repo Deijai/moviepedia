@@ -144,7 +144,7 @@ class _Slide extends StatelessWidget {
 
                   return GestureDetector(
                     child: FadeInRight(child: child),
-                    onTap: () => context.push('/movie/${movie.id}'),
+                    onTap: () => context.push('/home/0/movie/${movie.id}'),
                   );
                 },
               ),
